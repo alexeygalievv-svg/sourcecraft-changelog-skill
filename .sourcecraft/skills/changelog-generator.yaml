@@ -2,36 +2,25 @@
 # Place in repository: .sourcecraft/skills/changelog-generator.yaml
 ---
 name: changelog-generator
-title:
-  ru: Генератор CHANGELOG из git log
-  en: CHANGELOG generator from git log
-description:
-  ru: >-
-    Читает историю коммитов в указанной ветке, группирует по Conventional Commits
-    и формирует аккуратный Markdown для релиза.
-  en: >-
-    Reads commit history on the given branch, groups by Conventional Commits,
-    and emits clean Markdown for a release.
+title: CHANGELOG generator from git log
+description: >-
+  Reads commit history on the selected branch, groups by Conventional Commits
+  (feat/fix/chore/docs/refactor), skips merge commits, and returns clean Markdown for CHANGELOG.md.
+  Output language is controlled by the lang input (ru or en).
 
 metadata:
   inputs:
     version:
       type: string
-      description:
-        ru: Версия релиза для заголовка (например, 1.2.0).
-        en: Release version for the heading (e.g., 1.2.0).
+      description: "Release version for the heading (example: 1.2.0)."
       required: true
     branch:
       type: string
-      description:
-        ru: Ветка, по которой читать git log.
-        en: Branch to read git log from.
+      description: "Git branch to read history from (git log on this branch)."
       required: false
       default: main
     lang:
-      description:
-        ru: Язык заголовков и пояснений в результате (не переводить хеши и имена веток).
-        en: Language for headings and labels in the output (do not translate hashes/branch names).
+      description: "Language for changelog headings and section labels (ru | en). Commit subjects stay as in git."
       options:
         - ru
         - en
@@ -94,11 +83,11 @@ instructions: |
   - Documentation: 📚
   - Other: 🧩
 
-  Example heading style (en):
-  `### ✨ Features`
-
-  Example heading style (ru):
-  `### ✨ Новое`
+  **Localized group headings** (include the emoji prefix + one space + label):
+  - **en**: `### ✨ Features`, `### 🐛 Fixes`, `### ♻️ Refactors`, `### 🔧 Chores`,
+    `### 📚 Documentation`, `### 🧩 Other`
+  - **ru**: `### ✨ Новое`, `### 🐛 Исправления`, `### ♻️ Рефакторинг`, `### 🔧 Служебное`,
+    `### 📚 Документация`, `### 🧩 Прочее`
 
   Use `###` for groups. Under each group, use `- ` bullet list.
 
