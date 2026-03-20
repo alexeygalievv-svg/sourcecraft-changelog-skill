@@ -1,23 +1,13 @@
 name: changelog-generator
-description: Генерирует CHANGELOG.md из git-истории ветки
+description: Generates CHANGELOG.md from git history
 inputs:
   - name: version
-    type: string
-    description: Номер релиза (например 1.2.0)
+    description: Release version (e.g. 1.2.0)
     required: true
-  - name: branch
-    type: string
-    description: Ветка для git log
-    default: main
   - name: lang
-    type: choice
-    description: Язык заголовков (ru или en)
-    options:
-      - ru
-      - en
+    description: Output language ru or en
     default: ru
 instructions: |
-  Сгенерируй CHANGELOG.md для версии {{version}} из ветки {{branch}}.
-  Запусти git log {{branch}} --no-merges.
-  Сгруппируй: feat→✨, fix→🐛, refactor→♻️, chore→🔧, docs→📚.
-  Язык: {{lang}}. Выведи только Markdown.
+  Generate a CHANGELOG.md for version {{version}}.
+  Run git log main --no-merges and group commits by type.
+  Use emoji headings. Output only Markdown.
